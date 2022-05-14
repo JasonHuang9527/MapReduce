@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+service worker {
+  rpc DoJob (DoJobRequest) returns (DoJobResponse) {}
+}
+
+service master {
+  rpc Register (RegisterRequest) returns (RegisterResponse){}
+}
+
+message RegisterRequest {
+  string address = 1;
+}
+
+message RegisterResponse {
+  repeated string addresses = 1;
+}
+
+message DoJobRequest {
+  string filePath = 1;
+  string jobType = 2;
+}
+
+message DoJobResponse {
+  bool done = 1;
+}

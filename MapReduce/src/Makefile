@@ -35,10 +35,10 @@ vpath %.pb.cc $(GRPC_OUT_PATH)
 
 all: runMaster runWorker
 
-runMaster: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o runMaster.o master.o
+runMaster: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o runMaster.o master.o utils.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
-runWorker: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o runWorker.o
+runWorker: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o runWorker.o worker.o utils.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 
@@ -52,5 +52,6 @@ runWorker: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o 
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=$(GRPC_OUT_PATH) $<
 
 clean:
+	rm -f ./shards/*.txt
 	rm -f *.o runWorker runMaster
 	rm -f $(GRPC_OUT_PATH)/*.o $(GRPC_OUT_PATH)/*.pb.cc $(GRPC_OUT_PATH)/*.pb.h

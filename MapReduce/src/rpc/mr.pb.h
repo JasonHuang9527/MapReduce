@@ -511,17 +511,25 @@ class DoJobResponse : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // bool done = 1;
+  // string done = 1;
   void clear_done();
   static const int kDoneFieldNumber = 1;
-  bool done() const;
-  void set_done(bool value);
+  const ::std::string& done() const;
+  void set_done(const ::std::string& value);
+  #if LANG_CXX11
+  void set_done(::std::string&& value);
+  #endif
+  void set_done(const char* value);
+  void set_done(const char* value, size_t size);
+  ::std::string* mutable_done();
+  ::std::string* release_done();
+  void set_allocated_done(::std::string* done);
 
   // @@protoc_insertion_point(class_scope:DoJobResponse)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool done_;
+  ::google::protobuf::internal::ArenaStringPtr done_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_mr_2eproto::TableStruct;
 };
@@ -776,18 +784,57 @@ inline void DoJobRequest::set_allocated_jobtype(::std::string* jobtype) {
 
 // DoJobResponse
 
-// bool done = 1;
+// string done = 1;
 inline void DoJobResponse::clear_done() {
-  done_ = false;
+  done_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline bool DoJobResponse::done() const {
+inline const ::std::string& DoJobResponse::done() const {
   // @@protoc_insertion_point(field_get:DoJobResponse.done)
-  return done_;
+  return done_.GetNoArena();
 }
-inline void DoJobResponse::set_done(bool value) {
+inline void DoJobResponse::set_done(const ::std::string& value) {
   
-  done_ = value;
+  done_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:DoJobResponse.done)
+}
+#if LANG_CXX11
+inline void DoJobResponse::set_done(::std::string&& value) {
+  
+  done_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DoJobResponse.done)
+}
+#endif
+inline void DoJobResponse::set_done(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  done_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DoJobResponse.done)
+}
+inline void DoJobResponse::set_done(const char* value, size_t size) {
+  
+  done_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DoJobResponse.done)
+}
+inline ::std::string* DoJobResponse::mutable_done() {
+  
+  // @@protoc_insertion_point(field_mutable:DoJobResponse.done)
+  return done_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* DoJobResponse::release_done() {
+  // @@protoc_insertion_point(field_release:DoJobResponse.done)
+  
+  return done_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DoJobResponse::set_allocated_done(::std::string* done) {
+  if (done != NULL) {
+    
+  } else {
+    
+  }
+  done_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), done);
+  // @@protoc_insertion_point(field_set_allocated:DoJobResponse.done)
 }
 
 #ifdef __GNUC__

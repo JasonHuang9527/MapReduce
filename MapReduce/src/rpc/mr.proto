@@ -22,5 +22,5 @@ message DoJobRequest {
 }
 
 message DoJobResponse {
-  bool done = 1;
+  string done = 1;
 }

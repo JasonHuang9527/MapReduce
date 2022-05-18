@@ -171,7 +171,7 @@ void AddDescriptorsImpl() {
       "\030\001 \001(\t\"%\n\020RegisterResponse\022\021\n\taddresses\030"
       "\001 \003(\t\"1\n\014DoJobRequest\022\020\n\010filePath\030\001 \001(\t\022"
       "\017\n\007jobType\030\002 \001(\t\"\035\n\rDoJobResponse\022\014\n\004don"
-      "e\030\001 \001(\01022\n\006worker\022(\n\005DoJob\022\r.DoJobReques"
+      "e\030\001 \001(\t22\n\006worker\022(\n\005DoJob\022\r.DoJobReques"
       "t\032\016.DoJobResponse\"\0002;\n\006master\0221\n\010Registe"
       "r\022\020.RegisterRequest\032\021.RegisterResponse\"\000"
       "b\006proto3"
@@ -989,12 +989,15 @@ DoJobResponse::DoJobResponse(const DoJobResponse& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  done_ = from.done_;
+  done_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.done().size() > 0) {
+    done_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.done_);
+  }
   // @@protoc_insertion_point(copy_constructor:DoJobResponse)
 }
 
 void DoJobResponse::SharedCtor() {
-  done_ = false;
+  done_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 DoJobResponse::~DoJobResponse() {
@@ -1003,6 +1006,7 @@ DoJobResponse::~DoJobResponse() {
 }
 
 void DoJobResponse::SharedDtor() {
+  done_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void DoJobResponse::SetCachedSize(int size) const {
@@ -1025,7 +1029,7 @@ void DoJobResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  done_ = false;
+  done_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -1039,14 +1043,16 @@ bool DoJobResponse::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // bool done = 1;
+      // string done = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &done_)));
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_done()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->done().data(), static_cast<int>(this->done().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DoJobResponse.done"));
         } else {
           goto handle_unusual;
         }
@@ -1079,9 +1085,14 @@ void DoJobResponse::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool done = 1;
-  if (this->done() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->done(), output);
+  // string done = 1;
+  if (this->done().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->done().data(), static_cast<int>(this->done().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DoJobResponse.done");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->done(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1098,9 +1109,15 @@ void DoJobResponse::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool done = 1;
-  if (this->done() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->done(), target);
+  // string done = 1;
+  if (this->done().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->done().data(), static_cast<int>(this->done().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DoJobResponse.done");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->done(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1120,9 +1137,11 @@ size_t DoJobResponse::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bool done = 1;
-  if (this->done() != 0) {
-    total_size += 1 + 1;
+  // string done = 1;
+  if (this->done().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->done());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1152,8 +1171,9 @@ void DoJobResponse::MergeFrom(const DoJobResponse& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.done() != 0) {
-    set_done(from.done());
+  if (from.done().size() > 0) {
+
+    done_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.done_);
   }
 }
 
@@ -1181,7 +1201,8 @@ void DoJobResponse::Swap(DoJobResponse* other) {
 }
 void DoJobResponse::InternalSwap(DoJobResponse* other) {
   using std::swap;
-  swap(done_, other->done_);
+  done_.Swap(&other->done_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

@@ -1,8 +1,11 @@
 #include <string>
 #include "master.h"
+#include <thread>
+
+using namespace std;
 
 int main(int argc, char** argv) {
-    Master ms("localhost:5000","kjv12.txt");
-    ms.splitFile(4096);
+    Master ms(argv[1],argv[2], 10, 10);
     ms.startServer();
+
 }

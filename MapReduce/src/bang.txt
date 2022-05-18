@@ -1,0 +1,41 @@
+Server Listening on port: localhost:5000
+ ------------------------------ Split: kjv12.txt ------------------------------ 
+Number of shards:200
+ ------------------------------ initTasks ------------------------------ 
+[|( type: map, id: 0, status: idle)
+|( type: map, id: 1, status: idle)
+|( type: map, id: 2, status: idle)
+|( type: map, id: 3, status: idle)
+|( type: map, id: 4, status: idle)
+|( type: map, id: 5, status: idle)
+|( type: map, id: 6, status: idle)
+|( type: map, id: 7, status: idle)
+|( type: map, id: 8, status: idle)
+|( type: map, id: 9, status: idle)
+]
+[|( type: reduce, id: 0, status: idle)
+|( type: reduce, id: 1, status: idle)
+|( type: reduce, id: 2, status: idle)
+|( type: reduce, id: 3, status: idle)
+|( type: reduce, id: 4, status: idle)
+|( type: reduce, id: 5, status: idle)
+|( type: reduce, id: 6, status: idle)
+|( type: reduce, id: 7, status: idle)
+|( type: reduce, id: 8, status: idle)
+|( type: reduce, id: 9, status: idle)
+]
+idle task: ( type: map, id: 0, status: idle)
+
+no idle worker
+idle task: ( type: map, id: 0, status: idle)
+
+no idle worker
+idle task: ( type: map, id: 0, status: idle)
+
+no idle worker
+Master get Register request: localhost:5001
+???
+idle task: ( type: map, id: 0, status: idle)
+
+bang => localhost:5001
+idle worker: localhost:5001

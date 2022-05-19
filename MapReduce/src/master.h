@@ -20,21 +20,21 @@ class Task {
 
 inline ostream& operator << (ostream& os, const Task& t) 
 {
-    os << "( type: "<<t.type<<", id: "<<t.id<<", status: "<<t.status<<")"<<endl;
+    os << "( type: "<<t.type<<", id: "<<t.id<<", status: "<<t.status<<")";
     return os;
 };
 
 class WorkerClient{
     public:
         WorkerClient(shared_ptr<grpc::Channel> channel) : stub_(worker::NewStub(channel)){};
-        bool doJob(string filePath, string jobType);
+        bool doJob(vector<string> files, string jobType);
     private:
         unique_ptr<worker::Stub> stub_;
 };
 
 class WorkerInfo {
     public:
-        WorkerInfo(string masterAddress, string workerAddress);
+        WorkerInfo(string workerAddress);
         WorkerClient* workerClient;
         string workerAddress;
         string status;
@@ -50,23 +50,23 @@ class MasterServiceImpl : public master::Service {
 class Master {
     public:
         Master(string port, string file, int num_mapTask, int num_reduceTask);
-        void startServer();
-        void startMapReduce(MasterServiceImpl* service);
+        void startMasterService();
+        void startMapReduce();
         void splitFile(int chunkSize);
         void initTasks();
-        WorkerInfo * getIdleWorker(MasterServiceImpl* service);
+        WorkerInfo * getIdleWorker();
         Task* getIdleTask();
+
     private:
         string port; 
         string txtfile;
         int num_mapTask;
         int num_reduceTask;
-        
-
+        MasterServiceImpl* masterService;
         string shards_folder;
-        vector <string> shards;
-        vector<Task>mapTasks;
-        vector<Task>reduceTasks;
+        vector<string> shards;
+        vector<Task> mapTasks;
+        vector<Task> reduceTasks;
 };
 
 #endif

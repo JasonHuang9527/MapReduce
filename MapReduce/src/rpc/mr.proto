@@ -17,7 +17,7 @@ message RegisterResponse {
 }
 
 message DoJobRequest {
-  string filePath = 1;
+  repeated string files = 1;
   string jobType = 2;
 }
 

@@ -7,9 +7,7 @@
 using namespace std;
 
 
-class WorkerServiceImpl : public worker::Service {
-    grpc::Status DoJob(grpc::ServerContext* context, const DoJobRequest* req, DoJobResponse* rsp);  
-};
+
 
 class MasterClient{
     public:
@@ -18,15 +16,25 @@ class MasterClient{
     private:
         unique_ptr<master::Stub> stub_;
 };
+
+class WorkerServiceImpl : public worker::Service {
+    grpc::Status DoJob(grpc::ServerContext* context, const DoJobRequest* req, DoJobResponse* rsp);  
+    public:
+        void setMasterClient(string masterAddress);
+        void doMap(vector<string> files);
+        void doReduce(vector<string> files);
+        MasterClient* masterClient;
+
+};
+
 class Worker {
     public:
         Worker(string port,string masterAddress);
-        void startServer();
-        void doMap();
-        void doReduce();
+        void startWorkerService();
     private:
         string port; 
         string masterAddress;
+        WorkerServiceImpl* workerService;
 };
 
 #endif

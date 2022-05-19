@@ -123,7 +123,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DoJobRequest, filepath_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DoJobRequest, files_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DoJobRequest, jobtype_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DoJobResponse, _internal_metadata_),
@@ -169,15 +169,15 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\010mr.proto\"\"\n\017RegisterRequest\022\017\n\007address"
       "\030\001 \001(\t\"%\n\020RegisterResponse\022\021\n\taddresses\030"
-      "\001 \003(\t\"1\n\014DoJobRequest\022\020\n\010filePath\030\001 \001(\t\022"
-      "\017\n\007jobType\030\002 \001(\t\"\035\n\rDoJobResponse\022\014\n\004don"
-      "e\030\001 \001(\t22\n\006worker\022(\n\005DoJob\022\r.DoJobReques"
-      "t\032\016.DoJobResponse\"\0002;\n\006master\0221\n\010Registe"
-      "r\022\020.RegisterRequest\032\021.RegisterResponse\"\000"
-      "b\006proto3"
+      "\001 \003(\t\".\n\014DoJobRequest\022\r\n\005files\030\001 \003(\t\022\017\n\007"
+      "jobType\030\002 \001(\t\"\035\n\rDoJobResponse\022\014\n\004done\030\001"
+      " \001(\t22\n\006worker\022(\n\005DoJob\022\r.DoJobRequest\032\016"
+      ".DoJobResponse\"\0002;\n\006master\0221\n\010Register\022\020"
+      ".RegisterRequest\032\021.RegisterResponse\"\000b\006p"
+      "roto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 288);
+      descriptor, 285);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "mr.proto", &protobuf_RegisterTypes);
 }
@@ -675,7 +675,7 @@ void RegisterResponse::InternalSwap(RegisterResponse* other) {
 void DoJobRequest::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int DoJobRequest::kFilePathFieldNumber;
+const int DoJobRequest::kFilesFieldNumber;
 const int DoJobRequest::kJobTypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -688,12 +688,9 @@ DoJobRequest::DoJobRequest()
 }
 DoJobRequest::DoJobRequest(const DoJobRequest& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+      _internal_metadata_(NULL),
+      files_(from.files_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  filepath_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filepath().size() > 0) {
-    filepath_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filepath_);
-  }
   jobtype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.jobtype().size() > 0) {
     jobtype_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.jobtype_);
@@ -702,7 +699,6 @@ DoJobRequest::DoJobRequest(const DoJobRequest& from)
 }
 
 void DoJobRequest::SharedCtor() {
-  filepath_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   jobtype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -712,7 +708,6 @@ DoJobRequest::~DoJobRequest() {
 }
 
 void DoJobRequest::SharedDtor() {
-  filepath_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   jobtype_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -736,7 +731,7 @@ void DoJobRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  filepath_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  files_.Clear();
   jobtype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
@@ -751,16 +746,17 @@ bool DoJobRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string filePath = 1;
+      // repeated string files = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filepath()));
+                input, this->add_files()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filepath().data(), static_cast<int>(this->filepath().length()),
+            this->files(this->files_size() - 1).data(),
+            static_cast<int>(this->files(this->files_size() - 1).length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DoJobRequest.filePath"));
+            "DoJobRequest.files"));
         } else {
           goto handle_unusual;
         }
@@ -809,14 +805,14 @@ void DoJobRequest::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string filePath = 1;
-  if (this->filepath().size() > 0) {
+  // repeated string files = 1;
+  for (int i = 0, n = this->files_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filepath().data(), static_cast<int>(this->filepath().length()),
+      this->files(i).data(), static_cast<int>(this->files(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DoJobRequest.filePath");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->filepath(), output);
+      "DoJobRequest.files");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->files(i), output);
   }
 
   // string jobType = 2;
@@ -843,15 +839,14 @@ void DoJobRequest::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string filePath = 1;
-  if (this->filepath().size() > 0) {
+  // repeated string files = 1;
+  for (int i = 0, n = this->files_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filepath().data(), static_cast<int>(this->filepath().length()),
+      this->files(i).data(), static_cast<int>(this->files(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DoJobRequest.filePath");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->filepath(), target);
+      "DoJobRequest.files");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(1, this->files(i), target);
   }
 
   // string jobType = 2;
@@ -882,11 +877,12 @@ size_t DoJobRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // string filePath = 1;
-  if (this->filepath().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filepath());
+  // repeated string files = 1;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->files_size());
+  for (int i = 0, n = this->files_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->files(i));
   }
 
   // string jobType = 2;
@@ -923,10 +919,7 @@ void DoJobRequest::MergeFrom(const DoJobRequest& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.filepath().size() > 0) {
-
-    filepath_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filepath_);
-  }
+  files_.MergeFrom(from.files_);
   if (from.jobtype().size() > 0) {
 
     jobtype_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.jobtype_);
@@ -957,8 +950,7 @@ void DoJobRequest::Swap(DoJobRequest* other) {
 }
 void DoJobRequest::InternalSwap(DoJobRequest* other) {
   using std::swap;
-  filepath_.Swap(&other->filepath_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  files_.InternalSwap(CastToBase(&other->files_));
   jobtype_.Swap(&other->jobtype_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);

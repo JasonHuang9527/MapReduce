@@ -10,32 +10,34 @@
 
 using namespace std;
 
-bool WorkerClient::doJob(string filePath, string jobType) {
-            // create request & response
-            DoJobRequest request;
-            request.set_jobtype(jobType);
-            request.set_filepath(filePath);
-            DoJobResponse response;
+bool WorkerClient::doJob(vector<string> files, string jobType) {
+    // create request & response
+    DoJobRequest request;
+    request.set_jobtype(jobType);
+    for (auto & file : files){
+        request.add_files(file);
+    }
+    DoJobResponse response;
 
-            // context for the client 
-            grpc::ClientContext context;
+    // context for the client 
+    grpc::ClientContext context;
 
-            // remote procedure call
-            grpc::Status status = stub_->DoJob(&context, request, &response);
+    // remote procedure call
+    grpc::Status status = stub_->DoJob(&context, request, &response);
 
-            // act upon its status
-            if (status.ok()) {
-                cout << "dojob response: "<<response.done() <<endl;
-                return true;
-            } else {
-                cout << status.error_code() << ": " << status.error_message() << std::endl;
-                return false;
-            }
+    // act upon its status
+    if (status.ok()) {
+        cout << "dojob response: "<<response.done() <<endl;
+        return true;
+    } else {
+        cout << status.error_code() << ": " << status.error_message() << std::endl;
+        return false;
+    }
 }
 
 
-WorkerInfo::WorkerInfo(string masterAddress, string workerAddress) {
-    this->workerClient = new WorkerClient(grpc::CreateChannel(masterAddress, grpc::InsecureChannelCredentials()));
+WorkerInfo::WorkerInfo(string workerAddress) {
+    this->workerClient = new WorkerClient(grpc::CreateChannel(workerAddress, grpc::InsecureChannelCredentials()));
     this->workerAddress = workerAddress;
     this->status = "idle";
 }
@@ -44,7 +46,7 @@ grpc::Status MasterServiceImpl::Register(grpc::ServerContext* context, const Reg
     // handle req
     string workerAddress = req->address();
     cout << "Master get Register request: "<<workerAddress <<endl;
-    this->workerInfo.push_back(WorkerInfo(this->masterAddress, workerAddress) );
+    this->workerInfo.push_back(WorkerInfo(workerAddress) );
         
     // handle rsp
     for(WorkerInfo& w: this->workerInfo) {
@@ -65,44 +67,45 @@ Master::Master(string port, string file,int num_mapTask, int num_reduceTask) {
     this->num_mapTask = num_mapTask;
     this->num_reduceTask = num_reduceTask;
     this->shards_folder = "./shards";
-    
+    this->masterService = new MasterServiceImpl();
 }
 
-void Master::startServer() {
-    MasterServiceImpl service;
-    service.setMasterAddress(this->port);
+void Master::startMasterService() {
+    //MasterServiceImpl service;
+    //this->masterService->setMasterAddress(this->port);
 
     grpc::ServerBuilder builder;
 
-    // Listen on the given address without any authentication mechanism.
+    // Listen on the given address without any authentication meCreateChannelism.
     builder.AddListeningPort(this->port, grpc::InsecureServerCredentials());
 
     // Register "service" as the instance through which we'll communicate with
     // clients. In this case it corresponds to an *synchronous* service.
-    builder.RegisterService(&service);
+    builder.RegisterService(this->masterService);
 
     // Finally assemble the server.
     unique_ptr<grpc::Server> server(builder.BuildAndStart());
-    cout << "Server Listening on port: " << this->port << endl;
+    cout << "Server (master) Listening on port: " << this->port << endl;
 
     // Wait for the server to shutdown.
     //server -> Wait();
     thread t1(&grpc::Server::Wait, move(server) );
-    this->startMapReduce(&service);
+    this->startMapReduce();
     t1.join();
 }
 
 Task* Master::getIdleTask(){
     Task * t = nullptr;
     vector<Task>* tasks = nullptr;
-
+    int num_remain_mapTask = this->num_mapTask;
+    int num_remain_reduceTask = this->num_reduceTask;
     // decide it is in map_phase/reduce_phase/end
-    if (this->num_mapTask > 0) {
+    if (num_remain_mapTask > 0) {
         tasks = &this->mapTasks;
-    } else if (this->num_reduceTask > 0) {
+    } else if (num_remain_reduceTask > 0) {
         tasks = &this->reduceTasks;
     } else {
-        t = new Task("End", -1, "", "");
+        t = new Task("end", -1, "", "");
         return t;
     }
 
@@ -116,9 +119,9 @@ Task* Master::getIdleTask(){
     return t;
 }
 
-WorkerInfo* Master::getIdleWorker(MasterServiceImpl* service){
+WorkerInfo* Master::getIdleWorker(){
     WorkerInfo * w = nullptr;
-    for(WorkerInfo& worker: service->workerInfo) {
+    for(WorkerInfo& worker: this->masterService->workerInfo) {
         if (worker.status == "idle") {
             w = &worker;
             break;
@@ -127,39 +130,49 @@ WorkerInfo* Master::getIdleWorker(MasterServiceImpl* service){
     return w;
 }
 
-void Master::startMapReduce(MasterServiceImpl* service) {
+void Master::startMapReduce() {
     string filler =  " ------------------------------ " ;
 
-    cout << filler << "Split: "<<this->txtfile << filler <<endl;
+    cout << filler << "Split "<<this->txtfile <<" into shards"<< filler <<endl;
     this->splitFile(4096);
 
-    cout << filler << "initTasks"<< filler <<endl;
+    cout << filler << "Initialize task lists"<< filler <<endl;
     this->initTasks();
 
+    cout << filler << "Start assigning tasks to workers"<< filler <<endl;
     while (true){
         // get idle task
         Task* t = this->getIdleTask();
-        cout <<"idle task  => "<< *t <<endl;
-        if(t->type == "End") {
+        if(t->type == "end") {
             break;
         }
 
         // get idle worker
-        WorkerInfo* w = this->getIdleWorker(service);
+        WorkerInfo* w = this->getIdleWorker();
         if (w == NULL) {
             cout << "no idle worker => sleep for 1 second"<<endl;
             usleep(1000*1000);
             continue;
-        } else {
-            cout << "idle worker => " << w->workerAddress <<endl;
         }
+        cout <<"idle task   => "<< *t <<endl;
+        cout <<"idle worker => " << w->workerAddress <<endl;
 
         // rpc
+        auto shards_all = getShards("./shards");
+        vector<string> shards_assigned;
+        for(string & shard : shards_all) {
+            string name = getFileNameFromPath(shard, "/", true);
+            int file_id = stoi(name);
+            if (file_id % this->num_mapTask == t->id) {
+                shards_assigned.push_back(shard);
+            }
+        }
+        cout <<"master call "<<w->workerAddress << "'s doJob "<< *t <<endl;
+        w->workerClient->doJob(shards_assigned, "map");
 
+        t->status = "busy";
+        w->status = "busy";
 
-
-
-        return;
     }
 
     // merge result
@@ -221,8 +234,8 @@ void Master::initTasks() {
         Task t("reduce",id,"idle","");
         this->reduceTasks.push_back(t);
     }
-    cout << this->mapTasks << endl;
-    cout << this->reduceTasks <<endl;
+    cout << "map    tasks: \n    "<<this->mapTasks << endl;
+    cout << "\nreduce tasks: \n    "<<this->reduceTasks <<endl;
 }
 
 

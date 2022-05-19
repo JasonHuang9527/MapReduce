@@ -1,41 +1,347 @@
-Server Listening on port: localhost:5000
+Server (master) Listening on port: localhost:5000
  ------------------------------ Split: kjv12.txt ------------------------------ 
 Number of shards:200
  ------------------------------ initTasks ------------------------------ 
-[|( type: map, id: 0, status: idle)
-|( type: map, id: 1, status: idle)
-|( type: map, id: 2, status: idle)
-|( type: map, id: 3, status: idle)
-|( type: map, id: 4, status: idle)
-|( type: map, id: 5, status: idle)
-|( type: map, id: 6, status: idle)
-|( type: map, id: 7, status: idle)
-|( type: map, id: 8, status: idle)
-|( type: map, id: 9, status: idle)
-]
-[|( type: reduce, id: 0, status: idle)
-|( type: reduce, id: 1, status: idle)
-|( type: reduce, id: 2, status: idle)
-|( type: reduce, id: 3, status: idle)
-|( type: reduce, id: 4, status: idle)
-|( type: reduce, id: 5, status: idle)
-|( type: reduce, id: 6, status: idle)
-|( type: reduce, id: 7, status: idle)
-|( type: reduce, id: 8, status: idle)
-|( type: reduce, id: 9, status: idle)
-]
-idle task: ( type: map, id: 0, status: idle)
-
-no idle worker
-idle task: ( type: map, id: 0, status: idle)
-
-no idle worker
-idle task: ( type: map, id: 0, status: idle)
-
-no idle worker
+[|( type: map, id: 0, status: idle)|( type: map, id: 1, status: idle)|( type: map, id: 2, status: idle)|( type: map, id: 3, status: idle)|( type: map, id: 4, status: idle)|( type: map, id: 5, status: idle)|( type: map, id: 6, status: idle)|( type: map, id: 7, status: idle)|( type: map, id: 8, status: idle)|( type: map, id: 9, status: idle)]
+[|( type: reduce, id: 0, status: idle)|( type: reduce, id: 1, status: idle)|( type: reduce, id: 2, status: idle)|( type: reduce, id: 3, status: idle)|( type: reduce, id: 4, status: idle)|( type: reduce, id: 5, status: idle)|( type: reduce, id: 6, status: idle)|( type: reduce, id: 7, status: idle)|( type: reduce, id: 8, status: idle)|( type: reduce, id: 9, status: idle)]
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 0, status: idle)
+no idle worker => sleep for 1 second
 Master get Register request: localhost:5001
-???
-idle task: ( type: map, id: 0, status: idle)
+idle task  => ( type: map, id: 0, status: idle)
+idle worker => localhost:5001
+"./shards/174.txt"
+"./shards/146.txt"
+"./shards/109.txt"
+"./shards/110.txt"
+"./shards/193.txt"
+"./shards/175.txt"
+"./shards/176.txt"
+"./shards/90.txt"
+"./shards/22.txt"
+"./shards/10.txt"
+"./shards/63.txt"
+"./shards/2.txt"
+"./shards/102.txt"
+"./shards/20.txt"
+"./shards/89.txt"
+"./shards/11.txt"
+"./shards/178.txt"
+"./shards/47.txt"
+"./shards/125.txt"
+"./shards/194.txt"
+"./shards/134.txt"
+"./shards/17.txt"
+"./shards/53.txt"
+"./shards/114.txt"
+"./shards/172.txt"
+"./shards/77.txt"
+"./shards/69.txt"
+"./shards/65.txt"
+"./shards/68.txt"
+"./shards/15.txt"
+"./shards/190.txt"
+"./shards/80.txt"
+"./shards/96.txt"
+"./shards/84.txt"
+"./shards/121.txt"
+"./shards/58.txt"
+"./shards/23.txt"
+"./shards/82.txt"
+"./shards/171.txt"
+"./shards/183.txt"
+"./shards/64.txt"
+"./shards/200.txt"
+"./shards/101.txt"
+"./shards/60.txt"
+"./shards/119.txt"
+"./shards/59.txt"
+"./shards/173.txt"
+"./shards/73.txt"
+"./shards/157.txt"
+"./shards/177.txt"
+"./shards/87.txt"
+"./shards/198.txt"
+"./shards/129.txt"
+"./shards/95.txt"
+"./shards/130.txt"
+"./shards/43.txt"
+"./shards/154.txt"
+"./shards/55.txt"
+"./shards/180.txt"
+"./shards/133.txt"
+"./shards/9.txt"
+"./shards/105.txt"
+"./shards/48.txt"
+"./shards/113.txt"
+"./shards/153.txt"
+"./shards/128.txt"
+"./shards/151.txt"
+"./shards/33.txt"
+"./shards/6.txt"
+"./shards/152.txt"
+"./shards/42.txt"
+"./shards/111.txt"
+"./shards/108.txt"
+"./shards/26.txt"
+"./shards/91.txt"
+"./shards/19.txt"
+"./shards/199.txt"
+"./shards/196.txt"
+"./shards/126.txt"
+"./shards/165.txt"
+"./shards/197.txt"
+"./shards/181.txt"
+"./shards/100.txt"
+"./shards/159.txt"
+"./shards/49.txt"
+"./shards/163.txt"
+"./shards/45.txt"
+"./shards/169.txt"
+"./shards/5.txt"
+"./shards/12.txt"
+"./shards/115.txt"
+"./shards/57.txt"
+"./shards/131.txt"
+"./shards/41.txt"
+"./shards/107.txt"
+"./shards/145.txt"
+"./shards/117.txt"
+"./shards/71.txt"
+"./shards/50.txt"
+"./shards/28.txt"
+"./shards/97.txt"
+"./shards/44.txt"
+"./shards/192.txt"
+"./shards/138.txt"
+"./shards/135.txt"
+"./shards/103.txt"
+"./shards/93.txt"
+"./shards/143.txt"
+"./shards/38.txt"
+"./shards/78.txt"
+"./shards/161.txt"
+"./shards/37.txt"
+"./shards/88.txt"
+"./shards/98.txt"
+"./shards/122.txt"
+"./shards/35.txt"
+"./shards/29.txt"
+"./shards/186.txt"
+"./shards/32.txt"
+"./shards/160.txt"
+"./shards/144.txt"
+"./shards/167.txt"
+"./shards/189.txt"
+"./shards/166.txt"
+"./shards/70.txt"
+"./shards/24.txt"
+"./shards/51.txt"
+"./shards/14.txt"
+"./shards/164.txt"
+"./shards/140.txt"
+"./shards/30.txt"
+"./shards/148.txt"
+"./shards/4.txt"
+"./shards/72.txt"
+"./shards/118.txt"
+"./shards/34.txt"
+"./shards/195.txt"
+"./shards/182.txt"
+"./shards/149.txt"
+"./shards/54.txt"
+"./shards/158.txt"
+"./shards/86.txt"
+"./shards/124.txt"
+"./shards/132.txt"
+"./shards/142.txt"
+"./shards/1.txt"
+"./shards/150.txt"
+"./shards/168.txt"
+"./shards/85.txt"
+"./shards/31.txt"
+"./shards/75.txt"
+"./shards/184.txt"
+"./shards/13.txt"
+"./shards/16.txt"
+"./shards/21.txt"
+"./shards/99.txt"
+"./shards/67.txt"
+"./shards/120.txt"
+"./shards/61.txt"
+"./shards/139.txt"
+"./shards/18.txt"
+"./shards/141.txt"
+"./shards/94.txt"
+"./shards/92.txt"
+"./shards/0.txt"
+"./shards/147.txt"
+"./shards/56.txt"
+"./shards/104.txt"
+"./shards/62.txt"
+"./shards/179.txt"
+"./shards/187.txt"
+"./shards/185.txt"
+"./shards/76.txt"
+"./shards/127.txt"
+"./shards/74.txt"
+"./shards/136.txt"
+"./shards/116.txt"
+"./shards/155.txt"
+"./shards/81.txt"
+"./shards/36.txt"
+"./shards/52.txt"
+"./shards/106.txt"
+"./shards/46.txt"
+"./shards/137.txt"
+"./shards/40.txt"
+"./shards/112.txt"
+"./shards/39.txt"
+"./shards/170.txt"
+"./shards/3.txt"
+"./shards/156.txt"
+"./shards/188.txt"
+"./shards/123.txt"
+"./shards/79.txt"
+"./shards/191.txt"
+"./shards/27.txt"
+"./shards/8.txt"
+"./shards/83.txt"
+"./shards/25.txt"
+"./shards/66.txt"
+"./shards/7.txt"
+"./shards/162.txt"
+[|./shards/174.txt|./shards/146.txt|./shards/109.txt|./shards/110.txt|./shards/193.txt|./shards/175.txt|./shards/176.txt|./shards/90.txt|./shards/22.txt|./shards/10.txt|./shards/63.txt|./shards/2.txt|./shards/102.txt|./shards/20.txt|./shards/89.txt|./shards/11.txt|./shards/178.txt|./shards/47.txt|./shards/125.txt|./shards/194.txt|./shards/134.txt|./shards/17.txt|./shards/53.txt|./shards/114.txt|./shards/172.txt|./shards/77.txt|./shards/69.txt|./shards/65.txt|./shards/68.txt|./shards/15.txt|./shards/190.txt|./shards/80.txt|./shards/96.txt|./shards/84.txt|./shards/121.txt|./shards/58.txt|./shards/23.txt|./shards/82.txt|./shards/171.txt|./shards/183.txt|./shards/64.txt|./shards/200.txt|./shards/101.txt|./shards/60.txt|./shards/119.txt|./shards/59.txt|./shards/173.txt|./shards/73.txt|./shards/157.txt|./shards/177.txt|./shards/87.txt|./shards/198.txt|./shards/129.txt|./shards/95.txt|./shards/130.txt|./shards/43.txt|./shards/154.txt|./shards/55.txt|./shards/180.txt|./shards/133.txt|./shards/9.txt|./shards/105.txt|./shards/48.txt|./shards/113.txt|./shards/153.txt|./shards/128.txt|./shards/151.txt|./shards/33.txt|./shards/6.txt|./shards/152.txt|./shards/42.txt|./shards/111.txt|./shards/108.txt|./shards/26.txt|./shards/91.txt|./shards/19.txt|./shards/199.txt|./shards/196.txt|./shards/126.txt|./shards/165.txt|./shards/197.txt|./shards/181.txt|./shards/100.txt|./shards/159.txt|./shards/49.txt|./shards/163.txt|./shards/45.txt|./shards/169.txt|./shards/5.txt|./shards/12.txt|./shards/115.txt|./shards/57.txt|./shards/131.txt|./shards/41.txt|./shards/107.txt|./shards/145.txt|./shards/117.txt|./shards/71.txt|./shards/50.txt|./shards/28.txt|./shards/97.txt|./shards/44.txt|./shards/192.txt|./shards/138.txt|./shards/135.txt|./shards/103.txt|./shards/93.txt|./shards/143.txt|./shards/38.txt|./shards/78.txt|./shards/161.txt|./shards/37.txt|./shards/88.txt|./shards/98.txt|./shards/122.txt|./shards/35.txt|./shards/29.txt|./shards/186.txt|./shards/32.txt|./shards/160.txt|./shards/144.txt|./shards/167.txt|./shards/189.txt|./shards/166.txt|./shards/70.txt|./shards/24.txt|./shards/51.txt|./shards/14.txt|./shards/164.txt|./shards/140.txt|./shards/30.txt|./shards/148.txt|./shards/4.txt|./shards/72.txt|./shards/118.txt|./shards/34.txt|./shards/195.txt|./shards/182.txt|./shards/149.txt|./shards/54.txt|./shards/158.txt|./shards/86.txt|./shards/124.txt|./shards/132.txt|./shards/142.txt|./shards/1.txt|./shards/150.txt|./shards/168.txt|./shards/85.txt|./shards/31.txt|./shards/75.txt|./shards/184.txt|./shards/13.txt|./shards/16.txt|./shards/21.txt|./shards/99.txt|./shards/67.txt|./shards/120.txt|./shards/61.txt|./shards/139.txt|./shards/18.txt|./shards/141.txt|./shards/94.txt|./shards/92.txt|./shards/0.txt|./shards/147.txt|./shards/56.txt|./shards/104.txt|./shards/62.txt|./shards/179.txt|./shards/187.txt|./shards/185.txt|./shards/76.txt|./shards/127.txt|./shards/74.txt|./shards/136.txt|./shards/116.txt|./shards/155.txt|./shards/81.txt|./shards/36.txt|./shards/52.txt|./shards/106.txt|./shards/46.txt|./shards/137.txt|./shards/40.txt|./shards/112.txt|./shards/39.txt|./shards/170.txt|./shards/3.txt|./shards/156.txt|./shards/188.txt|./shards/123.txt|./shards/79.txt|./shards/191.txt|./shards/27.txt|./shards/8.txt|./shards/83.txt|./shards/25.txt|./shards/66.txt|./shards/7.txt|./shards/162.txt]
+master call localhost:5001 to do a job
+dojob response: Done
+rpc
 
-bang => localhost:5001
-idle worker: localhost:5001
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second
+idle task  => ( type: map, id: 1, status: idle)
+no idle worker => sleep for 1 second

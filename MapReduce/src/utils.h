@@ -29,5 +29,7 @@ vector<KeyValue> WCMap(string value);
 
 string WCReduce(string key, vector<string> values);
 
+vector<string> getShards(string path);
 
+string getFileNameFromPath(string path, string sep = "/", bool removeExtension = true);
 #endif

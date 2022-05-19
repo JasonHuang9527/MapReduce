@@ -41,8 +41,6 @@ runMaster: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o 
 runWorker: /home/MapReduce/src/rpc/mr.pb.o /home/MapReduce/src/rpc/mr.grpc.pb.o runWorker.o worker.o utils.o
 	$(CXX) $^ $(LDFLAGS) -o $@
 
-
-
 .PRECIOUS: %.grpc.pb.cc
 %.grpc.pb.cc: %.proto
 	$(PROTOC) -I $(PROTOS_PATH) --grpc_out=$(GRPC_OUT_PATH) --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $<

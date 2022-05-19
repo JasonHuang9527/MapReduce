@@ -3,19 +3,23 @@
 #include <iostream>
 #include <fstream>
 #include "utils.h"
-
+#include <thread>
 
 grpc::Status WorkerServiceImpl::DoJob(grpc::ServerContext* context, const DoJobRequest* req, DoJobResponse* rsp) {
     // handle req
-    auto file_path = req->filepath();
+    vector<string> files;
+    for(int i=0; i<req->files_size();i++){
+        // cout << response.addresses(i) <<" ";
+        files.push_back ( req->files(i) );
+    }
     auto job_type = req->jobtype();
-    cout << "Worker get DoJob request: "<<file_path <<" "<< job_type <<std::endl;
-    if (job_type == "Map") {
-
-    } else if (job_type == "Reduce") {
-
+    cout << "Worker get DoJob request: "<<files <<" "<< job_type <<std::endl;
+    if (job_type == "map") {
+        this->doMap(files);
+    } else if (job_type == "reduce") {
+        this->doReduce(files);
     } else {
-
+        
     }
     
     // handle rsp
@@ -24,6 +28,19 @@ grpc::Status WorkerServiceImpl::DoJob(grpc::ServerContext* context, const DoJobR
     // return status
     return grpc::Status::OK;
 };
+
+void WorkerServiceImpl::setMasterClient(string masterAddress) {
+    this->masterClient = new MasterClient(grpc::CreateChannel(masterAddress, grpc::InsecureChannelCredentials()));
+};
+
+void WorkerServiceImpl::doMap(vector<string> files){
+    return ;
+};
+
+void WorkerServiceImpl::doReduce(vector<string> files){
+    return ;
+};
+
 
 bool MasterClient::Register(std::string address) {
     // create request & response
@@ -53,20 +70,33 @@ bool MasterClient::Register(std::string address) {
 Worker::Worker(string port, string masterAddress) {
     this->port = port;
     this->masterAddress = masterAddress;
+    this->workerService = new WorkerServiceImpl();
+    this->workerService->setMasterClient(masterAddress);
 }
 
-void Worker::startServer() {
-    MasterClient MC(grpc::CreateChannel(this->masterAddress, grpc::InsecureChannelCredentials()));
-    bool reply = MC.Register(this->port);
-    cout << "MC received: " << reply << std::endl;
-};
+void Worker::startWorkerService() {
+    
+    grpc::ServerBuilder builder;
 
-void Worker::doMap(string file_path){
-    cout << "doMap:" << file_path <<endl;
-    return ;
+    // Listen on the given address without any authentication mechanism.
+    builder.AddListeningPort(this->port, grpc::InsecureServerCredentials());
+
+    // Register "service" as the instance through which we'll communicate with
+    // clients. In this case it corresponds to an *synchronous* service.
+    builder.RegisterService(this->workerService);
+
+    // Finally assemble the server.
+    unique_ptr<grpc::Server> server(builder.BuildAndStart());
+    cout << "Server (worker) Listening on port: " << this->port << endl;
+
+    // Wait for the server to shutdown.
+    // server -> Wait();
+    thread t1(&grpc::Server::Wait, move(server) );
+    bool reply = this->workerService->masterClient->Register(this->port);
+    cout << "client call register => received: " << reply << endl;
+    t1.join();
+
+
 }
 
-void Worker::doReduce(string file_path){
-    cout << "doReduce:" << file_path <<endl;
-    return ;
-}
+

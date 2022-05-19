@@ -385,19 +385,27 @@ class DoJobRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // string filePath = 1;
-  void clear_filepath();
-  static const int kFilePathFieldNumber = 1;
-  const ::std::string& filepath() const;
-  void set_filepath(const ::std::string& value);
+  // repeated string files = 1;
+  int files_size() const;
+  void clear_files();
+  static const int kFilesFieldNumber = 1;
+  const ::std::string& files(int index) const;
+  ::std::string* mutable_files(int index);
+  void set_files(int index, const ::std::string& value);
   #if LANG_CXX11
-  void set_filepath(::std::string&& value);
+  void set_files(int index, ::std::string&& value);
   #endif
-  void set_filepath(const char* value);
-  void set_filepath(const char* value, size_t size);
-  ::std::string* mutable_filepath();
-  ::std::string* release_filepath();
-  void set_allocated_filepath(::std::string* filepath);
+  void set_files(int index, const char* value);
+  void set_files(int index, const char* value, size_t size);
+  ::std::string* add_files();
+  void add_files(const ::std::string& value);
+  #if LANG_CXX11
+  void add_files(::std::string&& value);
+  #endif
+  void add_files(const char* value);
+  void add_files(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& files() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_files();
 
   // string jobType = 2;
   void clear_jobtype();
@@ -417,7 +425,7 @@ class DoJobRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr filepath_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> files_;
   ::google::protobuf::internal::ArenaStringPtr jobtype_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_mr_2eproto::TableStruct;
@@ -674,57 +682,73 @@ RegisterResponse::mutable_addresses() {
 
 // DoJobRequest
 
-// string filePath = 1;
-inline void DoJobRequest::clear_filepath() {
-  filepath_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// repeated string files = 1;
+inline int DoJobRequest::files_size() const {
+  return files_.size();
 }
-inline const ::std::string& DoJobRequest::filepath() const {
-  // @@protoc_insertion_point(field_get:DoJobRequest.filePath)
-  return filepath_.GetNoArena();
+inline void DoJobRequest::clear_files() {
+  files_.Clear();
 }
-inline void DoJobRequest::set_filepath(const ::std::string& value) {
-  
-  filepath_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DoJobRequest.filePath)
+inline const ::std::string& DoJobRequest::files(int index) const {
+  // @@protoc_insertion_point(field_get:DoJobRequest.files)
+  return files_.Get(index);
+}
+inline ::std::string* DoJobRequest::mutable_files(int index) {
+  // @@protoc_insertion_point(field_mutable:DoJobRequest.files)
+  return files_.Mutable(index);
+}
+inline void DoJobRequest::set_files(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DoJobRequest.files)
+  files_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void DoJobRequest::set_filepath(::std::string&& value) {
-  
-  filepath_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DoJobRequest.filePath)
+inline void DoJobRequest::set_files(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DoJobRequest.files)
+  files_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void DoJobRequest::set_filepath(const char* value) {
+inline void DoJobRequest::set_files(int index, const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  
-  filepath_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DoJobRequest.filePath)
+  files_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DoJobRequest.files)
 }
-inline void DoJobRequest::set_filepath(const char* value, size_t size) {
-  
-  filepath_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DoJobRequest.filePath)
+inline void DoJobRequest::set_files(int index, const char* value, size_t size) {
+  files_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DoJobRequest.files)
 }
-inline ::std::string* DoJobRequest::mutable_filepath() {
-  
-  // @@protoc_insertion_point(field_mutable:DoJobRequest.filePath)
-  return filepath_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* DoJobRequest::add_files() {
+  // @@protoc_insertion_point(field_add_mutable:DoJobRequest.files)
+  return files_.Add();
 }
-inline ::std::string* DoJobRequest::release_filepath() {
-  // @@protoc_insertion_point(field_release:DoJobRequest.filePath)
-  
-  return filepath_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void DoJobRequest::add_files(const ::std::string& value) {
+  files_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DoJobRequest.files)
 }
-inline void DoJobRequest::set_allocated_filepath(::std::string* filepath) {
-  if (filepath != NULL) {
-    
-  } else {
-    
-  }
-  filepath_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filepath);
-  // @@protoc_insertion_point(field_set_allocated:DoJobRequest.filePath)
+#if LANG_CXX11
+inline void DoJobRequest::add_files(::std::string&& value) {
+  files_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DoJobRequest.files)
+}
+#endif
+inline void DoJobRequest::add_files(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  files_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DoJobRequest.files)
+}
+inline void DoJobRequest::add_files(const char* value, size_t size) {
+  files_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DoJobRequest.files)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+DoJobRequest::files() const {
+  // @@protoc_insertion_point(field_list:DoJobRequest.files)
+  return files_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+DoJobRequest::mutable_files() {
+  // @@protoc_insertion_point(field_mutable_list:DoJobRequest.files)
+  return &files_;
 }
 
 // string jobType = 2;
